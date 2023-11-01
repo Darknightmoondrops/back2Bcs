@@ -147,8 +147,10 @@ newsRouter.get("/mainNews", async (req: Request, res: Response) => {
   try {
     const news = await NewsModel.find().sort({ _id: -1 }).limit(3);
     res.status(200).json(news);
+    console.log("کال شده1");
   } catch (error) {
     res.status(500).json({ error: "خطا در دریافت اخبار" });
+    console.log("کال شده2");
   }
 });
 export default newsRouter;

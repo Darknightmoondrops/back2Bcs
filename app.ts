@@ -7,29 +7,19 @@ import newsRouter from "./routes/news.routes";
 import productRouter from "./routes/product.routes";
 import path from "path";
 import formsRouter from "./routes/forms.routes";
-import * as mysql from "mysql2";
+// import * as mysql from "mysql2";
 dotenv.config();
 
 const app: Application = express();
-const PORT: number | string = process.env.PORT || 8536;
-const MONGODB_URI: string =
-  "mongodb://bcscocom_HoldingBCS:a960170871a@bcs.co.com:27017/bcscocom_HoldingBCS?authMechanism=SCRAM-SHA-256&authSource=bcscocom_HoldingBCS";
+const PORT: number | string | undefined = process.env.PORT || "";
+const MONGODB_URI: string = process.env.MONGODB_URI || "";
 
 app.use(
   cors({
-    origin: "https://bcs.co.com",
+    origin: ["https://bcs.co.com", "https://holding-bcs.com"],
   })
 );
-app.use(
-  cors({
-    origin: "https://holding-bcs.com",
-  })
-);
-app.use(
-  cors({
-    origin: "https://holding-bcs.com",
-  })
-);
+
 app.use(express.json());
 
 mongoose
@@ -42,21 +32,21 @@ mongoose
   });
 // const MYSQL_URI: string =
 //   "mysql://root:NxsDmKkqqWc3OxcFwql2j5mw@grace.iran.liara.ir:34795/stoic_knuth";
-const connection = mysql.createConnection({
-  host: "192.168.1.85",
-  port: 3306,
-  user: "root",
-  password: "1",
-  database: "bitnami_pm",
-});
+// const connection = mysql.createConnection({
+//   host: "192.168.1.85",
+//   port: 3306,
+//   user: "root",
+//   password: "1",
+//   database: "bitnami_pm",
+// });
 
-connection.connect((err) => {
-  if (err) {
-    console.error("Error connecting to MySQL:", err);
-    return;
-  }
-  console.log("Connected to MySQL server");
-});
+// connection.connect((err) => {
+//   if (err) {
+//     console.error("Error connecting to MySQL:", err);
+//     return;
+//   }
+//   console.log("Connected to MySQL server");
+// });
 
 app.use("/api/users", userRouter);
 app.use("/api/news", newsRouter);
